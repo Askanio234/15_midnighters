@@ -21,7 +21,7 @@ def load_attempts(api):
     result = send_request(api, None)
     attempts.extend(result["records"])
     number_of_pages = result["number_of_pages"]
-    for page in range(1, number_of_pages+1):
+    for page in range(2, number_of_pages+1):
         parameters = {"page": page}
         result = send_request(api, parameters)
         attempts.extend(result["records"])
@@ -41,7 +41,7 @@ def convert_to_local_time(attempts):
 
 
 def is_midnighter(MIN_TIME, MAX_TIME, record):
-    return bool(MIN_TIME <= record["time"].time().hour <= MAX_TIME)
+    return MIN_TIME <= record["time"].time().hour <= MAX_TIME
 
 
 def get_midnighters(attempts_in_local_time):
