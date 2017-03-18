@@ -21,10 +21,11 @@ def load_attempts(api):
     result = send_request(api, None)
     attempts.extend(result["records"])
     number_of_pages = result["number_of_pages"]
-    for page in range(2, number_of_pages+1):
-        parameters = {"page": page}
-        result = send_request(api, parameters)
-        attempts.extend(result["records"])
+    if number_of_pages > 1:
+        for page in range(2, number_of_pages+1):
+            parameters = {"page": page}
+            result = send_request(api, parameters)
+            attempts.extend(result["records"])
     return attempts
 
 
